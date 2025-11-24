@@ -18,22 +18,17 @@ if (!mongoURI) {
   process.exit(1);
 }
 
+app.get("/", (req, res) => {
+  res.json({ message: "Backend funcionando no Render!" });
+});
+
 mongoose.connect(mongoURI)
   .then(() => {
     console.log('✅ MongoDB Atlas conectado!');
 
-    app.listen(PORT, '0.0.0.0', () => {
+    app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando na porta ${PORT}`);
     });
 
   })
   .catch(err => console.error('❌ Erro ao conectar no MongoDB Atlas:', err));
-
-  app.get("/", (req, res) => {
-  res.json({ message: "Backend funcionando no Railway!" });
-});
-
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
